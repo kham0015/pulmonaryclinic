@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hyponatremia Decision Tree</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        background: linear-gradient(to bottom, #3498db, #2980b9);
+      }
+
+      #container {
+        width: 50%;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        text-align: center;
+      }
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 30px;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      #question {
+        margin-top: 50px;
+        font-weight: bold;
+      }
+
+      button {
+        display: block;
+        margin: 30px auto;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0062cc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Hyponatremia Decision Tree</h1>
+      <div id="question">Is osmolality less than 280?</div>
+      <button id="yes-btn">Yes</button>
+      <button id="no-btn">No</button>
+    </div>
+    <script>
+      // Define the decision tree
+      const decisionTree = {
+        question: "Is osmolality less than 280?",
+        yes: {
+          question: "Is urine osmolality less than 100?",
+          yes: {
+            question: "The possible diagnoses are beer potomania, polydipsia, or severe malnutrition.",
+            yes: null,
+            no: null
+          },
+          no: {
+            question: "Is urine sodium less than 25?",
+            yes: {
+              question: "Is the patient hypovolemic?",
+              yes: {
+                question: "The possible diagnoses are blood loss, GI loss, or exercise-induced.",
+                yes: null,
+                no: null
+              },
+              no: {
+                question: "The possible diagnoses are CHF, nephrotic syndrome, or cirrhosis.",
+                yes: null,
+                no: null
+              }
+            },
+            no: {
+              question: "Is urine sodium greater than 40?",
+              yes: {
+                question: "Is the patient normovolemic?",
+                yes: {
+                  question: "The possible diagnoses are SIADH, adrenal insufficiency, or hypothyroidism.",
+                  yes: null,
+                  no: null
+                },
+                no: {
+                  question: "The possible diagnoses are thiazide effect or cerebral salt wasting.",
+                  yes: null,
+                  no: null
+                }
+              },
+              no: {
+                question: "Sorry, no diagnosis available.",
+                yes: null,
+                no: null
+              }
+            }
+          }
+        },
+        no: {
+          question: "Sorry, no diagnosis available.",
+          yes: null,
+          no: null
+        }
+      };
+
+      // Initialize
+      let currentQuestion = decisionTree.question;
+let currentBranch = decisionTree;
+  // Get DOM elements
+  const questionElement = document.getElementById("question");
+  const yesButton = document.getElementById("yes-btn");
+  const noButton = document.getElementById("no-btn");
+
+  // Add event listeners to buttons
+  yesButton.addEventListener("click", () => {
+    // Check if there is a next question
+    if (currentBranch.yes) {
+      currentBranch = currentBranch.yes;
+      currentQuestion = currentBranch.question;
+      questionElement.textContent = currentQuestion;
+    } else {
+      questionElement.textContent = currentBranch.question;
+      yesButton.disabled = true;
+      noButton.disabled = true;
+    }
+  });
+
+  noButton.addEventListener("click", () => {
+    // Check if there is a next question
+    if (currentBranch.no) {
+      currentBranch = currentBranch.no;
+      currentQuestion = currentBranch.question;
+      questionElement.textContent = currentQuestion;
+    } else {
+      questionElement.textContent = currentBranch.question;
+      yesButton.disabled = true;
+      noButton.disabled = true;
+    }
+  });
+</script>
+</body>
+</html>

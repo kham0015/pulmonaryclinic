@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: antiquewhite;
+        }
+        .container {
+            position: relative;
+            height: 500px;
+            width: 800px;
+            background-color: antiquewhite;
+        }
+        .container1 {
+            height: 200px;
+            width: 800px;
+            background-color: rgb(224, 159, 72);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timer {
+            height: 50px;
+            width: 800px;
+            background-color: rgb(151, 116, 71);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container2 {
+            height: 150px;
+            width: 800px;
+            background-color: rgb(151, 116, 71);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container3 {
+            height: 100px;
+            width: 800px;
+            background-color: rgb(82, 65, 44);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container4 {
+            position: absolute;
+            height: 30px;
+            width: 50px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container1"></div>
+        <div class="timer"></div>
+        <div class="container2">
+            <button class="submitButton">Submit</button>
+            <input type="number" name="" id="" placeholder="Enter Answer Here">
+            <button class="nextButton">Next</button>
+        </div>
+    </div>
+    <div class="container4"></div>
+    <script>
+        const questions = [
+            { question: "What is 4 multiplied by 7?", answer: 28 },
+            { question: "What is 9 multiplied by 3?", answer: 27 },
+            { question: "What is 6 multiplied by 12?", answer: 72 }
+        ];
+
+        const container1 = document.querySelector(".container1");
+        const timerDiv = document.querySelector(".timer");
+        const answerInput = document.querySelector(".container2 input");
+        const container4 = document.querySelector(".container4");
+        const submitButton = document.querySelector(".submitButton");
+        const nextButton = document.querySelector(".nextButton");
+
+        let i = 0;
+        let score = 0;
+
+        container1.textContent = questions[i].question;
+
+        let countdown;
+
+        function startTimer() {
+            let timeLeft = 10;
+            timerDiv.textContent = `Time left: ${timeLeft}s`;
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                timerDiv.textContent = `Time left: ${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+        function nextQuestion() {
+            answerInput.value = "";
+            i++;
+
+            if (i < questions.length) {
+                container1.textContent = questions[i].question;
+                container4.style.display = "none";
+                startTimer();
+            } else {
+                clearInterval(countdown);
+                timerDiv.textContent = "";
+                const percentage = (score / questions.length) * 100;
+                container1.textContent = `End of quiz! Final score: ${score} (${percentage}%)`;
+                container4.style.display = "none";
+            }
+        }
+
+        startTimer();
+
+        submitButton.addEventListener("click", () => {
+            const answer = parseInt(answerInput.value);
+
+            if (isNaN(answer) || answer === "") {
+                alert("Please answer the question");
+                return;
+            }
+
+            if (answer === questions[i].answer) {
+                score++;
+                container4.innerHTML = "Correct";
+                container4.style.display = "flex";
+                container4.style.justifyContent = "center";
+                container4.style.alignItems = "center";
+                container4.style.backgroundColor = "green";
+            } else {
+                container4.innerHTML = "Wrong";
+                container4.style.display = "flex";
+                container4.style.justifyContent = "center";
+                container4.style.alignItems = "center";
+                container4.style.backgroundColor = "red";
+            }
+
+            clearInterval(countdown);
+        });
+
+        nextButton.addEventListener("click", () => {
+            if (answerInput.value === "") {
+                alert("Please answer the question");
+                return;
+            }
+
+            if (answerInput.value !== "" && container4.style.display === "none") {
+                alert("Please click 'Submit' before moving on to the next question");
+                return;
+            }
+
+            nextQuestion();
+        });
+    </script>
+</body>
+</html>
+

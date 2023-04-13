@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Big Background with Two Equal Divs</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-size: cover;
+			background-position: center;
+			font-family: Arial, sans-serif;
+			background-color: rgb(224, 229, 233);
+		}
+		
+		.container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			background-color: rgba(143, 151, 161, 0.5);
+		}
+		
+		.inner-container {
+			display: flex;
+			flex-direction: row;
+			width: 80%;
+			height: 80%;
+			background-color: #fff;
+		}
+		
+		.inner-container > div {
+			flex: 1;
+		}
+		
+		.left {
+			background-color:rgb(227, 233, 235) ;
+			height: 100%;
+		}
+		
+		.right {
+			background-color: rgb(217, 224, 226);
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="inner-container">
+			<div class="left">
+           <button>Submit</button>
+
+            </div>
+			<div class="right"></div>
+		</div>
+	</div>
+</body>
+
+<script>
+    const questions = [
+      { question: 'Which country is the largest by land area?', answer: 'Russia' },
+      { question: 'What is the capital of Italy?', answer: 'Rome' },
+      { question: 'What is the highest mountain in the world?', answer: 'Mount Everest' }
+    ];
+  
+    const rightDiv = document.querySelector('.right');
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Submit';
+    submitButton.addEventListener('click', calculateScore);
+    rightDiv.appendChild(submitButton);
+  
+    questions.forEach((question, index) => {
+      const p = document.createElement('p');
+      p.textContent = question.question;
+      rightDiv.insertBefore(p, submitButton);
+  
+      const input1 = document.createElement('input');
+      input1.type = 'radio';
+      input1.id = `${index}-option1`;
+      input1.name = `question${index}`;
+      input1.value = question.answer;
+      rightDiv.insertBefore(input1, submitButton);
+  
+      const label1 = document.createElement('label');
+      label1.htmlFor = `${index}-option1`;
+      label1.textContent = question.answer;
+      rightDiv.insertBefore(label1, submitButton);
+  
+      const input2 = document.createElement('input');
+      input2.type = 'radio';
+      input2.id = `${index}-option2`;
+      input2.name = `question${index}`;
+      input2.value = 'Wrong';
+      rightDiv.insertBefore(input2, submitButton);
+  
+      const label2 = document.createElement('label');
+      label2.htmlFor = `${index}-option2`;
+      label2.textContent = 'Wrong';
+      rightDiv.insertBefore(label2, submitButton);
+    });
+  
+    function calculateScore() {
+      const score = questions.reduce((totalScore, question, index) => {
+        const answer = document.querySelector(`input[name="question${index}"]:checked`);
+        if (answer && answer.value === question.answer) {
+          return totalScore + 1;
+        } else {
+          return totalScore;
+        }
+      }, 0);
+      alert(`You scored ${score}/${questions.length}`);
+    }
+  </script>
+  
+</html>

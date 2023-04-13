@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Nevada Critical Care Consultants</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .phone-number {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color:black;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+
+        nav ul li a:hover {
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+      
+
+        .providers-section {
+            display: flex;
+            justify-content: center;
+            background-color: #f8f9fa;
+            padding: 2rem;
+            height: 50%;
+        }
+
+        .provider {
+            text-align: center;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            margin: 150px;
+        }
+
+        .provider-name {
+            font-size: 1.25rem;
+            margin: 0;
+            
+        }
+
+        .provider-credentials {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .provider img {
+  width: 100px;
+  height: 100px;
+}
+
+
+.slide {
+
+    width: 100%;
+    height: 30px;
+    background-color: #007bff;
+
+
+    
+}
+
+.slideshow-container {
+  position: relative;
+  height: 50vh;
+  width: 100%;
+ 
+}
+
+.slideshow-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  width: 100%;
+height: 180px;
+  object-fit: cover;
+  object-fit: cover;
+
+}
+
+.slideshow-container img.active {
+  opacity: 1;
+}
+
+footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        contact-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
+
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-form label {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+
+        .contact-form textarea {
+            resize: none;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        provider-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.provider-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 class="title">Nevada Critical Care <br> Consultants</h1>
+        </div>
+        <div>
+            <h1> Pulmonary Clinic</h1>
+        </div>
+        <a href="tel:7024836200" class="phone-number">702-483-6200</a>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Practice</a></li>
+            <li><a href="providers.html">Providers</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+    </nav>
+
+    <div class="slide">
+
+        <div class="slideshow-container">
+            <img class="active" src="lung.jpg" alt="Lung image">
+            <img src="1.jpg" alt="Slide 1">
+            <img src="2.jpg" alt="Slide 2">
+            <img src="3.jpg" alt="Slide 3">
+            <img src="4.jpg" alt="Slide 4">
+        </div>
+
+    </div>
+      
+    <div class="providers-section">
+        <div class="provider">
+          <div>
+            <h2 class="provider-name">Dr. Firas Khamis</h2>
+            <p class="provider-credentials">Pulmonary and Critical Care</p>
+          </div>
+          <div>
+            <img src="firas.jpg" alt="">
+          </div>
+          <a href="firas-khamis.html" class="provider-button">Learn More</a>
+        </div>
+      
+        <div class="provider">
+          <div>
+            <h2 class="provider-name">Dr. Rishita Yelessiti</h2>
+          </div>
+          <div>
+            <p class="provider-credentials">Pulmonary and Critical Care</p>
+          </div>
+          <div>
+            <img src="yel.jpg" alt="">
+          </div>
+          <a href="rishita-yelessiti.html" class="provider-button">Learn More</a>
+        </div>
+      </div>
+    
+
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+
+    <footer>
+        &copy; <span id="currentYear"></span> Nevada Critical Care Consultants. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+    </footer>
+    
+
+    <script>
+        
+        const images = document.querySelectorAll('.slideshow-container img');
+    const intervalTime = 3000;
+    let imageIndex = 0;
+    let changeImageInterval;
+
+    const changeImage = () => {
+      images[imageIndex].classList.remove('active');
+      imageIndex = (imageIndex + 1) % images.length;
+      images[imageIndex].classList.add('active');
+    }
+
+    changeImageInterval = setInterval(changeImage, intervalTime);
+
+    document.getElementById("currentYear").innerText = new Date().getFullYear();
+    </script>
+    
+    
+</body>
+</html>

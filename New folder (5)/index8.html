@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Countdown Timer</title>
+    <style>
+      /* Center the div element */
+      #countdown {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="countdown"></div>
+    <script>
+      // Set the countdown time to 10 seconds
+      var timeLeft = 10;
+
+      // Update the countdown timer every second
+      var timer = setInterval(function() {
+        // Update the countdown display
+        document.getElementById("countdown").innerHTML = timeLeft + " seconds left";
+
+        // Decrease the time left by 1 second
+        timeLeft--;
+
+        // If the countdown is over, clear the timer
+        if (timeLeft < 0) {
+          clearInterval(timer);
+          document.getElementById("countdown").innerHTML = "Time's up!";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container"> </div>
+    <div class="container1"> 
+
+        <button class="submit">submit</button>
+    </div>
+
+    <div class="result"> </div>
+</body>
+</html>
+
+<style>
+
+body {
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+       
+     }
+     .container { 
+    position: relative;
+    height: 500px;
+    width: 800px;
+    background-color: rgb(188, 223, 94);
+
+     }
+
+     .container1 {
+        position: relative;
+        height: 100px;
+        width: 800px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(176, 180, 158);
+     }
+
+     .result {
+        position: absolute;
+        height: 100px;
+        width: 200px;
+        top: 60%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgreen;
+       font-size: 25px;
+
+
+
+
+     }
+
+</style>
+
+<script>
+
+// Create an array with image elements
+const imageArray = [];
+
+// Create a new image element for "tree.jpg" and push it into the array
+const treeImg = new Image();
+treeImg.src = "tree.jpg";
+imageArray.push(treeImg);
+
+// Create a new image element for "book.jpg" and push it into the array
+const bookImg = new Image();
+bookImg.src = "book.jpg";
+imageArray.push(bookImg);
+
+// Create a new image element for "straw.jpg" and push it into the array
+const strawImg = new Image();
+strawImg.src = "straw.jpg";
+imageArray.push(strawImg);
+
+const dogImg = new Image();
+dogImg.src = "dog.jpg";
+imageArray.push(dogImg);
+
+const coneImg = new Image();
+coneImg.src = "cone.jpg";
+imageArray.push(coneImg);
+
+const windowImg = new Image();
+windowImg.src = "window.jpg";
+imageArray.push(windowImg);
+
+const cloudImg = new Image();
+cloudImg.src = "cloud.jpg";
+imageArray.push(cloudImg);
+
+const sunImg = new Image();
+sunImg.src = "sun.jpg";
+imageArray.push(sunImg);
+
+const moonImg = new Image();
+moonImg.src = "moon.jpg";
+imageArray.push(moonImg);
+
+
+const kiteImg = new Image();
+kiteImg.src = "kite.jpg";
+imageArray.push(kiteImg);
+
+const shoesImg = new Image();
+shoesImg.src = "shoes.jpg";
+imageArray.push(shoesImg);
+
+const appleImg = new Image();
+appleImg.src = "apple.jpg";
+imageArray.push(appleImg);
+
+const carImg = new Image();
+carImg.src = "car.jpg";
+imageArray.push(carImg);
+
+const ballImg = new Image();
+ballImg.src = "ball.jpg";
+imageArray.push(ballImg);
+
+const pictures = ['tree', 'book', 'straw', 'dog', 'cone', 'window', 'cloud', 'sun', 'moon', 'kite', 'shoes', 'apple', 'car', 'ball'];
+
+// Get a reference to the container element on the page
+const container = document.querySelector(".container");
+const container1 = document.querySelector(".container1");
+
+// Set the initial index of the displayed image
+let currentIndex = 0;
+
+// Create a new button element for "Next"
+const nextButton = document.createElement("button");
+nextButton.textContent = "Next";
+container1.appendChild(nextButton);
+
+// Set the styles for the container element
+container.style.display = "flex";
+container.style.alignItems = "center";
+container.style.justifyContent = "center";
+container.style.flexDirection = "column";
+
+container1.style.display = "flex";
+container1.style.alignItems = "center";
+container1.style.justifyContent = "center";
+
+const submit = document.querySelector('.submit');
+const result = document.querySelector('.result');
+
+
+// Display the initial image
+displayImage();
+
+// Handle the "Next" button click
+nextButton.addEventListener("click", () => {
+  // Increment the current index
+  currentIndex++;
+  // If the current index is greater than or equal to the number of images, wrap around to the first image
+  if (currentIndex >= imageArray.length) {
+    currentIndex = 0;
+  }
+  // Display the next image
+  displayImage();
+  result.style.display = 'none';
+  
+ 
+  
+});
+
+// Function to display the current image
+function displayImage() {
+  // Remove any existing images from the container
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+  // Get the current image element from the array
+  const currentImage = imageArray[currentIndex];
+  // Create a new div element
+  const divElement = document.createElement("div");
+  // Set the width and height of the div element
+  divElement.style.width = "50%";
+  divElement.style.height = "50%";
+  // Set the display, alignItems, and justifyContent properties to center the image
+  divElement.style.display = "flex";
+  divElement.style.alignItems = "center";
+  divElement.style.justifyContent = "center";
+  // Set the width and height of the image element to 100%
+  currentImage.style.width = "100%";
+  currentImage.style.height = "100%";
+  // Append the image element to the div element
+  divElement.appendChild(currentImage);
+  // Append the div element to the container element
+  container.appendChild(divElement);
+  // Set the styles for the next button
+
+}
+
+
+
+submit.addEventListener("click", () => {
+  
+ result.style.display = 'flex';
+ result.innerHTML = pictures[currentIndex];
+ 
+
+  
+  
+});
+
+
+
+
+
+
+</script>

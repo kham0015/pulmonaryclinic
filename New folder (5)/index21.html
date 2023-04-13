@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disney Themed Counter</title>
+<style>
+    body {
+        margin: 0;
+        background-image: url('./disney.webp');
+    background-repeat: no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .counter-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .number-display {
+        font-size: 120px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+</style>
+</head>
+<body>
+<div class="counter-container">
+    <div class="number-display" id="number">0</div>
+    <button onclick="decrement()">Back</button>
+    <button onclick="increment()">Next</button>
+</div>
+
+<script>
+    let currentNumber = 0;
+    const numberDisplay = document.getElementById("number");
+
+    function increment() {
+        if (currentNumber < 40) {
+            currentNumber++;
+            numberDisplay.textContent = currentNumber;
+        }
+    }
+
+    function decrement() {
+        if (currentNumber > 0) {
+            currentNumber--;
+            numberDisplay.textContent = currentNumber;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background-color: antiquewhite;
+        }
+        .container {
+            position: relative;
+            height: 750px;
+            width: 800px;
+            background-color: antiquewhite;
+        }
+        .container1 {
+            height: 150px;
+            width: 800px;
+            background-color: rgb(224, 159, 72);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timer {
+            height: 50px;
+            width: 800px;
+            background-color: rgb(151, 116, 71);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container2 {
+            height: 100px;
+            width: 800px;
+            background-color: rgb(151, 116, 71);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      
+        .container4 {
+            position: absolute;
+            height: 30px;
+            width: 50px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .container5 {
+            height: 200px;
+            width: 800px;
+            background-color: rgb(236, 218, 193);
+            display: flex;
+            justify-content: center;
+            top: 20%;
+            bottom: 0;
+
+
+        }
+        .summary {
+            display: none;
+            background-color: white;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 20px;
+            overflow-y: auto;
+             
+            align-items: center;
+            justify-content: center;
+        }
+        .results {
+            display: none;
+        }
+
+        .summaryButton {
+
+            display: none;
+        }
+
+        input[type="number"] {
+  margin-bottom: 30px; /* add 10 pixels of margin to the bottom of the text input */
+}
+
+button {
+  margin-bottom: 30px; /* add 10 pixels of margin to the bottom of all buttons */
+}
+
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="container5"></div>
+        <div class="container1"></div>
+        <div class="timer"></div>
+        <div class="container2">
+            <button class="submitButton">Submit</button>
+            <input type="number" name="" id="" placeholder="Enter Answer Here">
+            <button class="nextButton">Next</button>
+            <button class="summaryButton">Summary</button>
+        </div>
+        
+            <div class="results">
+                
+            </div>
+        </div>
+        <div class="summary"></div>
+    </div>
+    <div class="container4"></div>
+    <script>
+
+
+        const questions = [
+            { question: "What is 4 multiplied by 7?", answer: 28 },
+            { question: "What is 9 multiplied by 3?", answer: 27 },
+            { question: "What is 6 multiplied by 12?", answer: 72 }
+        ];
+
+        const youtubeVideos = [
+            'https://www.youtube.com/watch?v=m8AkrA8C8bE', 
+            'https://www.youtube.com/watch?v=KzSpKf4l6k4',
+            'https://www.youtube.com/watch?v=aZdvC0YQ_Mw'
+];
+        const container1 = document.querySelector(".container1");
+    const timerDiv = document.querySelector(".timer");
+    const answerInput = document.querySelector(".container2 input");
+    const container4 = document.querySelector(".container4");
+    const submitButton = document.querySelector(".submitButton");
+    const nextButton = document.querySelector(".nextButton");
+    const summaryButton = document.querySelector(".summaryButton");
+    const summaryDiv = document.querySelector(".summary");
+    const resultsDiv = document.querySelector(".results");
+    const container5 = document.querySelector(".container5")
+
+
+    let i = 0;
+    let score = 0;
+    const wrongAnswers = [];
+    
+
+
+
+    container1.textContent = `Q${i + 1}: ${questions[i].question}`;
+    loadVideo(youtubeVideos[i]);
+    
+    function loadVideo(videoUrl) {
+ 
+  container5.innerHTML = '';
+
+  
+  const video = document.createElement('iframe');
+  video.src = videoUrl.replace("watch?v=", "embed/");
+  video.classList.add('video');
+
+
+  container5.appendChild(video);
+  
+}
+
+   
+
+    let countdown;
+
+    function startTimer() {
+        let timeLeft = 10;
+        timerDiv.textContent = `Time left: ${timeLeft}s`;
+
+        countdown = setInterval(() => {
+            timeLeft--;
+            timerDiv.textContent = `Time left: ${timeLeft}s`;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                wrongAnswers.push(i + 1);
+                nextQuestion();
+            }
+        }, 1000);
+    }
+    function nextQuestion() {
+        answerInput.value = "";
+        i++;
+
+        if (i < questions.length) {
+            container1.textContent = `Q${i + 1}: ${questions[i].question}`;
+            loadVideo(youtubeVideos[i]);
+            container4.style.display = "none";
+            startTimer();
+        } else {
+            clearInterval(countdown);
+            timerDiv.textContent = "";
+            const percentage = (score / questions.length) * 100;
+            container1.textContent = `End of quiz! Final score: ${score} (${percentage}%)`;
+            container4.style.display = "none";
+            resultsDiv.style.display = "block";
+            submitButton.style.display= "none";
+            nextButton.style.display="none";
+            summaryButton.style.display ="block";
+            container5.innerHTML = '';
+
+        }
+    }
+
+    startTimer();
+
+    submitButton.addEventListener("click", () => {
+        const answer = parseInt(answerInput.value);
+
+        if (isNaN(answer) || answer === "") {
+            alert("Please answer the question");
+            return;
+        }
+
+        if (answer === questions[i].answer) {
+            score++;
+            container4.innerHTML = "Correct";
+            container4.style.display = "flex";
+            container4.style.justifyContent = "center";
+            container4.style.alignItems = "center";
+            container4.style.backgroundColor = "green";
+        } else {
+            wrongAnswers.push(i + 1);
+            container4.innerHTML = "Wrong";
+            container4.style.display = "flex";
+            container4.style.justifyContent = "center";
+            container4.style.alignItems = "center";
+            container4.style.backgroundColor = "red";
+        }
+
+        clearInterval(countdown);
+    });
+
+    nextButton.addEventListener("click", () => {
+        if (answerInput.value === "") {
+            alert("Please answer the question");
+            return;
+        }
+
+        if (answerInput.value !== "" && container4.style.display === "none") {
+            alert("Please click 'Submit' before moving on to the next question");
+            return;
+        }
+
+        nextQuestion();
+    });
+
+    summaryButton.addEventListener("click", () => {
+        summaryDiv.innerHTML = "Incorrectly answered questions:<br>";
+        wrongAnswers.forEach(questionNumber => {
+            summaryDiv.innerHTML += `Q${questionNumber}: ${questions[questionNumber - 1].question}<br>`;
+        });
+        summaryDiv.style.display = "flex";
+        summaryDiv.style.justifyContent="center";
+        summaryDiv.style.alignItems="center";
+    });
+</script>
+</body>
+</html>

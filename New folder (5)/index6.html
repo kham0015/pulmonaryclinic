@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="container">
+        <div id="video-container"></div>
+        <div id="button-container">
+          <button id="next-button">Next</button>
+        </div>
+      </div>
+      
+
+</body>
+
+<style>
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#video-container {
+  margin-top: 20px;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#next-button {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+
+</style>
+
+<script>
+   const youtubeVideos = [
+  'https://www.youtube.com/watch?v=m8AkrA8C8bE', 
+  'https://www.youtube.com/watch?v=KzSpKf4l6k4',
+  'https://www.youtube.com/watch?v=aZdvC0YQ_Mw'
+];
+
+const videoContainer = document.getElementById('video-container');
+const nextButton = document.getElementById('next-button');
+let currentVideoIndex = 0;
+
+// Load the first video when the page loads
+loadVideo(youtubeVideos[currentVideoIndex]);
+
+// Add a click event listener to the next button
+nextButton.addEventListener('click', () => {
+  // Increase the current video index and load the next video
+  currentVideoIndex++;
+  if (currentVideoIndex >= youtubeVideos.length) {
+    currentVideoIndex = 0;
+  }
+  loadVideo(youtubeVideos[currentVideoIndex]);
+});
+
+function loadVideo(videoUrl) {
+  // Remove any previously loaded videos
+  videoContainer.innerHTML = '';
+
+  // Create a new iframe element for the current video
+  const video = document.createElement('iframe');
+  video.src = videoUrl.replace("watch?v=", "embed/");
+  video.classList.add('video');
+
+  // Append the current video to the video container
+  videoContainer.appendChild(video);
+}
+
+  
+</script>
+</html>

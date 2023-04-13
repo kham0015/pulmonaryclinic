@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            height: 400px;
+            width: 800px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timer {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px;
+            background-color: white;
+            width: 70px;
+            height: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer"></div>
+    </div>
+    <script>
+        const timer = document.querySelector(".timer");
+        let countdown;
+
+        function startTimer() {
+            let timeRemaining = 10;
+            timer.textContent = `Time: ${timeRemaining}s`;
+
+            countdown = setInterval(() => {
+                timeRemaining--;
+                timer.textContent = `Time: ${timeRemaining}s`;
+
+                if (timeRemaining === 0) {
+                    clearInterval(countdown);
+                    // Add any action to be performed when the timer reaches 0
+                }
+            }, 1000);
+        }
+
+        startTimer();
+    </script>
+</body>
+</html>

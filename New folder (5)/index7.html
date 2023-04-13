@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+     body {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: antiquewhite;
+     }
+     .container { 
+    position: relative;
+    height: 500px;
+    width: 800px;
+    background-color: antiquewhite;
+
+     }
+
+     .container1{
+        height: 200px;
+        width: 800px;
+        background-color: rgb(224, 159, 72);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+     }
+
+     .container2 {
+        height: 200px;
+        width: 800px;
+        background-color: rgb(151, 116, 71);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+     }
+
+     .container3 {
+        height: 100px;
+        width: 800px;
+        background-color: rgb(82, 65, 44);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+     }
+
+     .container4 {
+
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+     }
+
+     .summary {
+        display:none ;
+    
+    }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+  <div class="container1"></div>
+  <div class="container2">
+<button class="submitButton">Submit</button>
+<input type="number" name="" id="" placeholder="Enter Answer Here">
+<button class="nextButton">Next</button>
+<button class="summary"> summary</button>
+
+  </div>
+  
+    </div>
+
+    <div class="container4"></div>
+
+    
+</body>
+
+<script>
+// Define an array of question objects
+const questions = [
+  { question: "What is 4 multiplied by 7?", answer: 28 },
+  { question: "What is 9 multiplied by 3?", answer: 27 },
+  { question: "What is 6 multiplied by 12?", answer: 72 }
+];
+
+let incorrectAnswers = [];
+
+// Get references to HTML elements
+const container1 = document.querySelector(".container1");
+const answerInput = document.querySelector(".container2 input");
+const container4 = document.querySelector(".container4");
+const submitButton = document.querySelector(".submitButton");
+const nextButton = document.querySelector(".nextButton");
+const scoreDisplay = document.querySelector(".scoreDisplay");
+const summary=document.querySelector(".summary");
+
+// Define a variable to keep track of the current question index
+let i = 0;
+
+// Define a variable to keep track of the user's score
+let score = 0;
+
+
+
+// Display the first question
+container1.textContent = questions[i].question;
+
+
+// Handle the "Submit" button click
+submitButton.addEventListener("click", () => {
+  // Parse the answer input as an integer
+  const answer = parseInt(answerInput.value);
+  // If the answer is not a number or is an empty string, show an alert and do nothing
+  if (isNaN(answer) || answer === "") {
+    alert("Please answer the question");
+    return;
+  }
+  // If the answer is correct, increment the score and display a "Correct" message in container4
+  if (answer === questions[i].answer) {
+    score++;
+    container4.innerHTML = "Correct";
+    container4.style.display = "flex";
+    container4.style.justifyContent = "center";
+    container4.style.alignItems = "center";
+    container4.style.backgroundColor = "green";
+  }
+  // If the answer is incorrect, display a "Wrong" message in container4
+  else {
+    container4.innerHTML = "Wrong";
+    container4.style.display = "flex";
+    container4.style.justifyContent = "center";
+    container4.style.alignItems = "center";
+    container4.style.backgroundColor = "red";
+    incorrectAnswers.push(i);
+  }
+  // Update the score display
+  scoreDisplay.textContent = `Score: ${score}`;
+  // Clear the answer input field
+  answerInput.value = "";
+});
+
+
+// Handle the "Next" button click
+nextButton.addEventListener("click", () => {
+
+  // If the answer input is empty, show an alert and do nothing
+  if (answerInput.value === "") {
+    alert("Please answer the question");
+    return;
+  }
+  // If the answer input is not empty but the "Submit" button was not clicked, show an alert and do nothing
+  if (answerInput.value !== "" && container4.style.display === "none") {
+    alert("Please click 'Submit' before moving on to the next question");
+    return;
+  }
+  // Clear the answer input field
+  answerInput.value = "";
+  // Increment the current question index
+  i++;
+  // If there are more questions, display the next question
+  if (i < questions.length) {
+    
+    container1.textContent = questions[i].question;
+    container4.style.display = "none";
+    
+    
+  }
+  
+
+  // If there are no more questions, calculate and display the final score and percentage
+  else {
+    const percentage = (score / questions.length) * 100;
+    container1.textContent = `End of quiz! Final score: ${score} (${percentage}%)`;
+    container4.style.display = "none";
+    nextButton.style.display="none";
+    submitButton.style.display="none";
+    summary.style.display="block";
+  }
+});
+``
+
+
+    
+    </script>
+</html>
+
+
+

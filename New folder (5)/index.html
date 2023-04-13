@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Centered Container with Colorful Divs</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #f5f5f5;
+		}
+
+		.container {
+			margin: 0 auto;
+			width: 80%;
+			height: 400px;
+			background-color: #fff;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			border-radius: 0px;
+		}
+
+		 .bottom {
+			height: 100px;
+			width: 100%;
+			background-color: #ff7f50;
+			border-radius: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+		}
+
+		.middle {
+			height: 200px;
+			width: 100%;
+			background-color: #858fa3;
+			border-radius: 0px;
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
+
+		.top {
+			height: 200px;
+			width: 100%;
+			background-color: #446dbe;
+			border-radius: 0px;
+			margin-top: 0px;
+			margin-bottom: 0px;
+
+
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="top"></div>
+		<div class="middle"></div>
+		<div class="bottom">
+            <div class="bottom">
+              <input type="text" placeholder="Enter your text here">
+              
+              
+              
+                <button>Submit</button>
+            </div>
+              
+              
+        </div>
+	</div>
+</body>
+
+<script>
+const middleDiv = document.querySelector('.middle');
+const topDiv = document.querySelector('.top');
+topDiv.style.backgroundImage = "url('tree.jpg')";
+topDiv.style.backgroundSize = "contain";
+topDiv.style.backgroundRepeat = "no-repeat";
+topDiv.style.backgroundPosition = "center";
+
+middleDiv.innerHTML = "name the couple?"
+
+
+const submitButton = document.querySelector('.bottom button');
+const answerInput = document.querySelector('.bottom input');
+
+submitButton.addEventListener('click', () => {
+  if (answerInput.value === 'firas and eva') {
+    alert('Correct');
+  } else {
+    alert('Wrong');
+  }
+});
+
+
+
+
+
+
